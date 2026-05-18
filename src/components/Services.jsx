@@ -1,24 +1,29 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import cmpImage from "../assets/cmp.png";
+import lmsImage from "../assets/lms.png";
+import cmfImage from "../assets/cmf.png";
 
 const services = [
   {
     title: "Conference Paper Submission",
-    img: "https://cdn-icons-png.flaticon.com/512/3135/3135755.png",
+    img: cmpImage,
     desc: "Submit research papers, abstracts, and academic articles for conferences.",
     link: "/login",
     gradient: "from-slate-700 to-slate-900",
   },
+
   {
     title: "LMS Moodle Integration",
-    img: "https://cdn-icons-png.flaticon.com/512/3135/3135768.png",
+    img: lmsImage,
     desc: "Manage reviewer assignments and peer review workflows efficiently.",
     link: "/login",
     gradient: "from-blue-700 to-indigo-900",
   },
+
   {
     title: "Conference Management",
-    img: "https://cdn-icons-png.flaticon.com/512/3135/3135789.png",
+    img: cmfImage,
     desc: "Organize schedules, sessions, tracks, and participant activities.",
     link: "/login",
     gradient: "from-gray-700 to-gray-900",
