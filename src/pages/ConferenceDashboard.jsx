@@ -7,7 +7,11 @@ import {
   Lock,
   User,
   HelpCircle,
+  Settings,
+  Bell,
+  Moon,
 } from "lucide-react";
+import { useNavigate } from "react-router-dom";
 
 const myConferences = [
   {
@@ -69,6 +73,9 @@ const ConferenceDashboard = () => {
 
   const [showHelp, setShowHelp] = useState(false);
   const [showUserMenu, setShowUserMenu] = useState(false);
+  const navigate = useNavigate();
+  const [darkMode, setDarkMode] = useState(false);
+  const [notificationCount] = useState();
 
   const helpRef = useRef();
   const userRef = useRef();
@@ -101,6 +108,13 @@ const ConferenceDashboard = () => {
     };
   }, []);
 
+  const handleLogout = () => {
+
+    localStorage.removeItem("token");
+
+    navigate("/login");
+  };
+
   const conferences =
     activeTab === "my"
       ? myConferences
@@ -111,10 +125,26 @@ const ConferenceDashboard = () => {
   );
 
   return (
-    <section className="min-h-screen bg-gray-100">
+    <section
+      className={`
+    min-h-screen transition-all duration-300
+    ${darkMode
+          ? "bg-gray-900 text-white"
+          : "bg-gray-100 text-gray-900"
+        }
+  `}
+    >
 
       {/* NAVBAR */}
-      <div className="bg-gradient-to-r from-yellow-400 via-blue-600 to-purple-700 text-white shadow-lg">
+      <div
+        className={`
+    text-white shadow-lg
+    ${darkMode
+            ? "bg-gray-950 border-b border-gray-800"
+            : "bg-gradient-to-r from-yellow-400 via-blue-600 to-purple-700"
+          }
+  `}
+      >
 
         <div className="max-w-[1440px] mx-auto px-4 py-4 flex flex-col md:flex-row md:items-center md:justify-between gap-4">
 
@@ -143,7 +173,18 @@ const ConferenceDashboard = () => {
               </button>
 
               {showHelp && (
-                <div className="absolute right-0 mt-3 w-[95vw] sm:w-[360px] bg-white rounded-2xl shadow-2xl p-5 z-50 animate-fadeIn">
+                <div
+                  className={`
+    absolute right-0 mt-3
+    w-[95vw] sm:w-[360px]
+    rounded-2xl shadow-2xl
+    p-5 z-50 animate-fadeIn
+    ${darkMode
+                      ? "bg-gray-800 text-white"
+                      : "bg-white"
+                    }
+  `}
+                >
 
                   <h3 className="text-lg font-bold text-gray-800 mb-4">
                     Frequently Asked Questions
@@ -171,7 +212,6 @@ const ConferenceDashboard = () => {
               )}
             </div>
 
-            {/* USER PROFILE */}
             {/* USER PROFILE */}
             <div className="relative" ref={userRef}>
 
@@ -207,10 +247,6 @@ const ConferenceDashboard = () => {
                     Ashwani Gupta
                   </span>
 
-                  <span className="text-xs text-gray-200">
-                    Admin
-                  </span>
-
                 </div>
 
                 {/* ARROW */}
@@ -226,16 +262,16 @@ const ConferenceDashboard = () => {
               {showUserMenu && (
 
                 <div
-                  className="
-        absolute right-0 mt-4
-        w-[92vw] sm:w-[320px]
-        bg-white
-        rounded-3xl
-        shadow-2xl
-        overflow-hidden
-        z-50
-        animate-fadeIn
-      "
+                  className={`
+    absolute right-0 mt-4
+    w-[92vw] sm:w-[320px]
+    rounded-3xl shadow-2xl
+    overflow-hidden z-50 animate-fadeIn
+    ${darkMode
+                      ? "bg-gray-800 text-white"
+                      : "bg-white"
+                    }
+  `}
                 >
 
                   {/* TOP PROFILE CARD */}
@@ -294,7 +330,7 @@ const ConferenceDashboard = () => {
 
                     {/* PROFILE */}
                     <button
-                      onClick={() => alert("Open My Profile")}
+                      onClick={() => navigate("/profile")}
                       className="
             w-full flex items-center gap-4
             px-5 py-4
@@ -319,7 +355,7 @@ const ConferenceDashboard = () => {
 
                     {/* SETTINGS */}
                     <button
-                      onClick={() => alert("Open Settings")}
+                      onClick={() => navigate("/settings")}
                       className="
             w-full flex items-center gap-4
             px-5 py-4
@@ -344,7 +380,7 @@ const ConferenceDashboard = () => {
 
                     {/* NOTIFICATIONS */}
                     <button
-                      onClick={() => alert("Notifications")}
+                      onClick={() => navigate("/notifications")}
                       className="
             w-full flex items-center gap-4
             px-5 py-4
@@ -369,7 +405,7 @@ const ConferenceDashboard = () => {
 
                     {/* DARK MODE */}
                     <button
-                      onClick={() => alert("Dark Mode Feature")}
+                      onClick={() => setDarkMode(!darkMode)}
                       className="
             w-full flex items-center gap-4
             px-5 py-4
@@ -394,7 +430,7 @@ const ConferenceDashboard = () => {
 
                     {/* CHANGE PASSWORD */}
                     <button
-                      onClick={() => alert("Change Password")}
+                      onClick={() => navigate("/change-password")}
                       className="
             w-full flex items-center gap-4
             px-5 py-4
@@ -422,9 +458,7 @@ const ConferenceDashboard = () => {
 
                     {/* LOGOUT */}
                     <button
-                      onClick={() => {
-                        alert("Logged Out Successfully");
-                      }}
+                      onClick={handleLogout}
                       className="
             w-full flex items-center gap-4
             px-5 py-4
@@ -479,7 +513,9 @@ const ConferenceDashboard = () => {
               <button
                 onClick={() => setActiveTab("my")}
                 className={`px-6 py-3 rounded-xl text-lg font-medium transition-all duration-300 ${activeTab === "my"
-                    ? "bg-gradient-to-r from-yellow-400 via-blue-500 to-purple-600 text-white shadow-lg"
+                  ? "bg-gradient-to-r from-yellow-400 via-blue-500 to-purple-600 text-white shadow-lg"
+                  : darkMode
+                    ? "bg-gray-800 text-white border border-gray-700"
                     : "bg-white text-gray-700 border border-gray-300"
                   }`}
               >
@@ -489,8 +525,8 @@ const ConferenceDashboard = () => {
               <button
                 onClick={() => setActiveTab("all")}
                 className={`px-6 py-3 rounded-xl text-lg font-medium transition-all duration-300 ${activeTab === "all"
-                    ? "bg-gradient-to-r from-yellow-400 via-blue-500 to-purple-600 text-white shadow-lg"
-                    : "bg-white text-gray-700 border border-gray-300"
+                  ? "bg-gradient-to-r from-yellow-400 via-blue-500 to-purple-600 text-white shadow-lg"
+                  : "bg-white text-gray-700 border border-gray-300"
                   }`}
               >
                 All Conferences
@@ -508,7 +544,14 @@ const ConferenceDashboard = () => {
               placeholder="Search conference..."
               value={search}
               onChange={(e) => setSearch(e.target.value)}
-              className="w-full bg-white border border-gray-300 rounded-xl py-3 pl-12 pr-4 outline-none focus:ring-2 focus:ring-blue-500"
+              className={`
+  w-full rounded-xl py-3 pl-12 pr-4
+  outline-none focus:ring-2 focus:ring-blue-500
+  ${darkMode
+                  ? "bg-gray-800 border-gray-700 text-white"
+                  : "bg-white border-gray-300 text-gray-800"
+                }
+`}
             />
 
             <Search
@@ -521,7 +564,16 @@ const ConferenceDashboard = () => {
         </div>
 
         {/* TABLE */}
-        <div className="overflow-x-auto bg-white rounded-2xl shadow-lg border border-gray-200">
+        <div
+          className={`
+    overflow-x-auto
+    rounded-2xl shadow-lg border
+    ${darkMode
+              ? "bg-gray-800 border-gray-700"
+              : "bg-white border-gray-200"
+            }
+  `}
+        >
 
           <table className="w-full min-w-[1000px]">
 
@@ -554,7 +606,13 @@ const ConferenceDashboard = () => {
 
                 <tr
                   key={index}
-                  className="border-t hover:bg-blue-50/50 transition"
+                  className={`
+  border-t transition
+  ${darkMode
+                      ? "border-gray-700 hover:bg-gray-700"
+                      : "hover:bg-blue-50/50"
+                    }
+`}
                 >
 
                   <td className="px-5 py-5 text-blue-700 font-medium hover:underline cursor-pointer">
