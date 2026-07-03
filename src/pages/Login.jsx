@@ -10,7 +10,8 @@ const Login = () => {
   const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
 
-  const handleLogin = () => {
+  const handleLogin = (e) => {
+    e.preventDefault();
 
     // Dummy Login Credentials
     if (
@@ -18,9 +19,8 @@ const Login = () => {
         emailOrMobile === "9876543210") &&
       password === "Academic@2026"
     ) {
-
+      // Directly navigate to dashboard
       navigate("/conference-dashboard");
-
     } else {
       alert("Invalid Email/Mobile or Password");
     }
@@ -41,7 +41,7 @@ const Login = () => {
         </div>
 
         {/* FORM */}
-        <div className="p-6">
+        <form className="p-6" onSubmit={handleLogin}>
 
           {/* EMAIL / MOBILE */}
           <div className="mb-4">
@@ -56,10 +56,17 @@ const Login = () => {
               value={emailOrMobile}
               onChange={(e) => setEmailOrMobile(e.target.value)}
               className="
-                w-full px-4 py-3 border rounded-md
-                focus:outline-none focus:ring-2
-                focus:ring-blue-400
-              "
+                          w-full
+                          px-4 py-3
+                          bg-gray-50
+                          border-2 border-gray-300
+                          rounded-lg
+                          text-gray-800
+                          placeholder:text-gray-500
+                          focus:outline-none
+                          focus:ring-0
+                          focus:border-blue-500
+                        "
             />
           </div>
 
@@ -78,11 +85,17 @@ const Login = () => {
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
                 className="
-                  w-full px-4 py-3 border rounded-md
-                  focus:outline-none focus:ring-2
-                  focus:ring-blue-400
-                  pr-12
-                "
+                            w-full
+                            px-4 py-3
+                            bg-gray-50
+                            border-2 border-gray-300
+                            rounded-lg
+                            text-gray-800
+                            placeholder:text-gray-500
+                            focus:outline-none
+                            focus:ring-0
+                            focus:border-blue-500
+                          "
               />
 
               {/* Eye Icon */}
@@ -102,13 +115,12 @@ const Login = () => {
                   <Eye size={18} />
                 )}
               </button>
-
             </div>
           </div>
 
           {/* BUTTON */}
           <button
-            onClick={handleLogin}
+            type="submit"
             className="
               w-full py-3 rounded-md text-white font-medium
               bg-gradient-to-r from-yellow-400 via-blue-500 to-purple-500
@@ -149,7 +161,7 @@ const Login = () => {
 
           </div>
 
-        </div>
+        </form>
 
       </div>
 

@@ -185,10 +185,10 @@ const Home = () => {
         <FAQ />
       </section>
 
-      {/* ABOUT SECTION */}
+      {/* ABOUT SECTION - Restored completely to your original layout specs */}
       <section 
-      id="about"
-      className="scroll-mt-10"
+        id="about"
+        className="scroll-mt-10"
       >
 
         <div
@@ -278,19 +278,27 @@ const Home = () => {
 
               </div>
 
-              {/* RIGHT STATS */}
+              {/* RIGHT STATS - Dynamic individual micro-interactions applied internally inside the grid blocks */}
               <div
                 className="
                   grid grid-cols-2 gap-5
                 "
               >
 
+                {/* CONFERENCE CARD */}
                 <div
                   className="
                     bg-white/10
                     backdrop-blur-md
                     rounded-2xl
                     p-6 text-center
+                    border border-transparent
+                    hover:border-yellow-400/30
+                    hover:bg-yellow-400/5
+                    hover:-translate-y-1.5
+                    hover:shadow-xl
+                    transition-all duration-300
+                    cursor-default
                   "
                 >
 
@@ -298,18 +306,26 @@ const Home = () => {
                     500+
                   </h3>
 
-                  <p className="mt-2 text-gray-300">
+                  <p className="mt-2 text-gray-300 font-medium">
                     Conferences
                   </p>
 
                 </div>
 
+                {/* RESEARCHERS CARD */}
                 <div
                   className="
                     bg-white/10
                     backdrop-blur-md
                     rounded-2xl
                     p-6 text-center
+                    border border-transparent
+                    hover:border-blue-400/30
+                    hover:bg-blue-400/5
+                    hover:-translate-y-1.5
+                    hover:shadow-xl
+                    transition-all duration-300
+                    cursor-default
                   "
                 >
 
@@ -317,18 +333,26 @@ const Home = () => {
                     10K+
                   </h3>
 
-                  <p className="mt-2 text-gray-300">
+                  <p className="mt-2 text-gray-300 font-medium">
                     Researchers
                   </p>
 
                 </div>
 
+                {/* INSTITUTIONS CARD */}
                 <div
                   className="
                     bg-white/10
                     backdrop-blur-md
                     rounded-2xl
                     p-6 text-center
+                    border border-transparent
+                    hover:border-purple-400/30
+                    hover:bg-purple-400/5
+                    hover:-translate-y-1.5
+                    hover:shadow-xl
+                    transition-all duration-300
+                    cursor-default
                   "
                 >
 
@@ -336,18 +360,26 @@ const Home = () => {
                     120+
                   </h3>
 
-                  <p className="mt-2 text-gray-300">
+                  <p className="mt-2 text-gray-300 font-medium">
                     Institutions
                   </p>
 
                 </div>
 
+                {/* SUPPORT CARD */}
                 <div
                   className="
                     bg-white/10
                     backdrop-blur-md
                     rounded-2xl
                     p-6 text-center
+                    border border-transparent
+                    hover:border-green-400/30
+                    hover:bg-green-400/5
+                    hover:-translate-y-1.5
+                    hover:shadow-xl
+                    transition-all duration-300
+                    cursor-default
                   "
                 >
 
@@ -355,7 +387,7 @@ const Home = () => {
                     24/7
                   </h3>
 
-                  <p className="mt-2 text-gray-300">
+                  <p className="mt-2 text-gray-300 font-medium">
                     Support
                   </p>
 

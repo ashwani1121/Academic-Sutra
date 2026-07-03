@@ -22,6 +22,20 @@ const Signup = () => {
     confirmPassword: "",
   });
 
+  const inputStyle = `
+  w-full
+  px-4 py-3
+  bg-gray-50
+  border-2 border-gray-300
+  rounded-lg
+  text-gray-800
+  placeholder:text-gray-500
+  placeholder:font-medium
+  focus:outline-none
+  focus:ring-0
+  focus:border-blue-500
+`;
+
   const handleChange = (e) => {
     setFormData({
       ...formData,
@@ -92,7 +106,7 @@ const Signup = () => {
               name="firstName"
               placeholder="First Name"
               onChange={handleChange}
-              className="border rounded-xl px-4 py-3 outline-none focus:ring-2 focus:ring-blue-500"
+              className={inputStyle}
             />
 
             <input
@@ -100,7 +114,7 @@ const Signup = () => {
               name="lastName"
               placeholder="Last Name"
               onChange={handleChange}
-              className="border rounded-xl px-4 py-3 outline-none focus:ring-2 focus:ring-blue-500"
+              className={inputStyle}
             />
 
             <input
@@ -108,7 +122,7 @@ const Signup = () => {
               name="email"
               placeholder="Email Address"
               onChange={handleChange}
-              className="border rounded-xl px-4 py-3 outline-none focus:ring-2 focus:ring-blue-500 sm:col-span-2"
+              className={`${inputStyle} sm:col-span-2`}
             />
 
             <input
@@ -116,20 +130,15 @@ const Signup = () => {
               name="mobile"
               placeholder="Mobile Number"
               onChange={handleChange}
-              className="border rounded-xl px-4 py-3 outline-none focus:ring-2 focus:ring-blue-500"
+              className={inputStyle}
             />
 
             <select
               name="organization"
               onChange={handleChange}
-              className="
-    border rounded-xl px-4 py-3
-    outline-none focus:ring-2 focus:ring-blue-500
-    bg-white
-  "
+              className={inputStyle}
             >
               <option value="">Select Organization</option>
-
               <option value="IIT Delhi">IIT Delhi</option>
               <option value="IIT Bombay">IIT Bombay</option>
               <option value="IIT Madras">IIT Madras</option>
@@ -141,20 +150,14 @@ const Signup = () => {
               <option value="Private Research Organization">
                 Private Research Organization
               </option>
-
             </select>
 
             <select
               name="country"
               onChange={handleChange}
-              className="
-    border rounded-xl px-4 py-3
-    outline-none focus:ring-2 focus:ring-blue-500
-    bg-white
-  "
+              className={inputStyle}
             >
               <option value="">Select Country</option>
-
               <option value="India">🇮🇳 India</option>
               <option value="United States">🇺🇸 United States</option>
               <option value="United Kingdom">🇬🇧 United Kingdom</option>
@@ -165,7 +168,6 @@ const Signup = () => {
               <option value="China">🇨🇳 China</option>
               <option value="Singapore">🇸🇬 Singapore</option>
               <option value="France">🇫🇷 France</option>
-
             </select>
 
             <input
@@ -173,7 +175,7 @@ const Signup = () => {
               name="scholarId"
               placeholder="Google Scholar ID"
               onChange={handleChange}
-              className="border rounded-xl px-4 py-3 outline-none focus:ring-2 focus:ring-blue-500"
+              className={inputStyle}
             />
 
             <input
@@ -181,7 +183,7 @@ const Signup = () => {
               name="orcidId"
               placeholder="ORCID ID"
               onChange={handleChange}
-              className="border rounded-xl px-4 py-3 outline-none focus:ring-2 focus:ring-blue-500"
+              className={`${inputStyle} sm:col-span-2`}
             />
 
             <input
@@ -189,7 +191,7 @@ const Signup = () => {
               name="dblpId"
               placeholder="DBLP ID"
               onChange={handleChange}
-              className="border rounded-xl px-4 py-3 outline-none focus:ring-2 focus:ring-blue-500 sm:col-span-2"
+              className={`${inputStyle} sm:col-span-2`}
             />
 
             {/* PASSWORD */}
@@ -200,11 +202,7 @@ const Signup = () => {
                 name="password"
                 placeholder="Password"
                 onChange={handleChange}
-                className="
-                  w-full border rounded-xl px-4 py-3
-                  outline-none focus:ring-2 focus:ring-blue-500
-                  pr-12
-                "
+                className={`${inputStyle} pr-12`}
               />
 
               <button
@@ -229,9 +227,8 @@ const Signup = () => {
               name="confirmPassword"
               placeholder="Confirm Password"
               onChange={handleChange}
-              className="border rounded-xl px-4 py-3 outline-none focus:ring-2 focus:ring-blue-500"
+              className={inputStyle}
             />
-
           </div>
 
           {/* TERMS */}
@@ -243,7 +240,6 @@ const Signup = () => {
               I agree to the Terms of Service, Privacy Policy,
               and conference data policies.
             </p>
-
           </div>
 
           {/* BUTTON */}

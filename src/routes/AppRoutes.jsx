@@ -7,6 +7,7 @@ import Profile from "../pages/Profile";
 import Settings from "../pages/Settings";
 import Notifications from "../pages/Notifications";
 import ChangePassword from "../pages/ChangePassword";
+import ConferenceDetails from "../pages/ConferenceDetails";
 
 const AppRoutes = () => {
   return (
@@ -20,17 +21,22 @@ const AppRoutes = () => {
       />
       <Route path="/profile" element={<Profile />} />
 
-<Route path="/settings" element={<Settings />} />
+      <Route path="/settings" element={<Settings />} />
 
-<Route
-  path="/notifications"
-  element={<Notifications />}
-/>
+      <Route
+        path="/notifications"
+        element={<Notifications />}
+      />
 
-<Route
-  path="/change-password"
-  element={<ChangePassword />}
-/>
+      <Route
+        path="/change-password"
+        element={<ChangePassword />}
+      />
+
+      <Route
+        path="/conference/:id"
+        element={<ConferenceDetails />}
+      />
     </Routes>
   );
 };

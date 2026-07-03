@@ -1,4 +1,6 @@
 import React, { useState, useRef, useEffect } from "react";
+import MyConferences from "./MyConferences";
+import AllConferences from "./AllConferences";
 import {
   Search,
   Mail,
@@ -150,7 +152,7 @@ const ConferenceDashboard = () => {
 
           {/* LOGO */}
           <h1 className="text-2xl font-bold">
-            Academic Sutra
+            Conferences
           </h1>
 
           {/* RIGHT SIDE */}
@@ -508,30 +510,28 @@ const ConferenceDashboard = () => {
             </h2>
 
             {/* TABS */}
-            <div className="flex flex-wrap gap-4">
-
+            <div className="flex gap-3">
               <button
                 onClick={() => setActiveTab("my")}
-                className={`px-6 py-3 rounded-xl text-lg font-medium transition-all duration-300 ${activeTab === "my"
-                  ? "bg-gradient-to-r from-yellow-400 via-blue-500 to-purple-600 text-white shadow-lg"
-                  : darkMode
-                    ? "bg-gray-800 text-white border border-gray-700"
-                    : "bg-white text-gray-700 border border-gray-300"
+                className={`px-5 py-3 rounded-lg font-medium transition
+      ${activeTab === "my"
+                    ? "bg-blue-600 text-white"
+                    : "bg-white border border-gray-300 text-gray-700"
                   }`}
               >
-                My Conferences
+                My Conferences ({myConferences.length})
               </button>
 
               <button
                 onClick={() => setActiveTab("all")}
-                className={`px-6 py-3 rounded-xl text-lg font-medium transition-all duration-300 ${activeTab === "all"
-                  ? "bg-gradient-to-r from-yellow-400 via-blue-500 to-purple-600 text-white shadow-lg"
-                  : "bg-white text-gray-700 border border-gray-300"
+                className={`px-5 py-3 rounded-lg font-medium transition
+      ${activeTab === "all"
+                    ? "bg-blue-600 text-white"
+                    : "bg-white border border-gray-300 text-gray-700"
                   }`}
               >
-                All Conferences
+                All Conferences ({allConferences.length})
               </button>
-
             </div>
 
           </div>
@@ -541,22 +541,24 @@ const ConferenceDashboard = () => {
 
             <input
               type="text"
-              placeholder="Search conference..."
+              placeholder="type to filter..."
               value={search}
               onChange={(e) => setSearch(e.target.value)}
-              className={`
-  w-full rounded-xl py-3 pl-12 pr-4
-  outline-none focus:ring-2 focus:ring-blue-500
-  ${darkMode
-                  ? "bg-gray-800 border-gray-700 text-white"
-                  : "bg-white border-gray-300 text-gray-800"
-                }
-`}
+              className="
+    w-full lg:w-72
+    px-8 py-3
+    bg-white
+    border border-gray-300
+    rounded-lg
+    focus:outline-none
+    focus:ring-2
+    focus:ring-blue-500
+  "
             />
 
             <Search
-              size={20}
-              className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400"
+              size={16}
+              className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400"
             />
 
           </div>
@@ -564,103 +566,18 @@ const ConferenceDashboard = () => {
         </div>
 
         {/* TABLE */}
-        <div
-          className={`
-    overflow-x-auto
-    rounded-2xl shadow-lg border
-    ${darkMode
-              ? "bg-gray-800 border-gray-700"
-              : "bg-white border-gray-200"
-            }
-  `}
-        >
 
-          <table className="w-full min-w-[1000px]">
-
-            <thead className="bg-gradient-to-r from-yellow-100 via-blue-100 to-purple-100">
-
-              <tr>
-
-                {[
-                  "Conference Name",
-                  "Start Date",
-                  "Location",
-                  "External URL",
-                  "Contact",
-                ].map((heading, index) => (
-                  <th
-                    key={index}
-                    className="text-left px-5 py-5 text-lg font-bold text-gray-800"
-                  >
-                    {heading}
-                  </th>
-                ))}
-
-              </tr>
-
-            </thead>
-
-            <tbody>
-
-              {filteredConferences.map((conference, index) => (
-
-                <tr
-                  key={index}
-                  className={`
-  border-t transition
-  ${darkMode
-                      ? "border-gray-700 hover:bg-gray-700"
-                      : "hover:bg-blue-50/50"
-                    }
-`}
-                >
-
-                  <td className="px-5 py-5 text-blue-700 font-medium hover:underline cursor-pointer">
-                    {conference.name}
-                  </td>
-
-                  <td className="px-5 py-5 text-gray-700">
-                    {conference.date}
-                  </td>
-
-                  <td className="px-5 py-5 text-gray-700">
-                    {conference.location}
-                  </td>
-
-                  <td className="px-5 py-5">
-
-                    <a
-                      href={conference.url}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="text-purple-700 hover:underline"
-                    >
-                      {conference.url}
-                    </a>
-
-                  </td>
-
-                  <td className="px-5 py-5">
-
-                    <button className="flex items-center gap-2 text-blue-700 hover:text-purple-700 transition">
-
-                      <Mail size={18} />
-
-                      Email Chairs
-
-                    </button>
-
-                  </td>
-
-                </tr>
-
-              ))}
-
-            </tbody>
-
-          </table>
-
-        </div>
+        {activeTab === "my" ? (
+          <MyConferences
+            conferences={filteredConferences}
+            darkMode={darkMode}
+          />
+        ) : (
+          <AllConferences
+            conferences={filteredConferences}
+            darkMode={darkMode}
+          />
+        )}
 
       </div>
 
