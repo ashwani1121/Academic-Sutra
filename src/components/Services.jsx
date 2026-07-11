@@ -1,4 +1,5 @@
 import React from "react";
+import { useNavigate } from "react-router-dom"; 
 import cmpImage from "../assets/cmp.png";
 import lmsImage from "../assets/lms.png";
 import cmfImage from "../assets/cmf.png";
@@ -82,6 +83,14 @@ const ServiceAnimationStyles = () => (
       opacity: 1;
       visibility: visible;
     }
+    /* Hide scrollbars across various dynamic screen widths */
+    .hide-scrollbar::-webkit-scrollbar {
+      display: none;
+    }
+    .hide-scrollbar {
+      -ms-overflow-style: none;
+      scrollbar-width: none;
+    }
   `}</style>
 );
 
@@ -107,12 +116,14 @@ const services = [
 ];
 
 const Services = () => {
+  const navigate = useNavigate();
+
   const handleCardNavigation = (url) => {
-    window.location.href = url;
+    navigate(url); 
   };
 
   return (
-    <section className="text-black pt-6 sm:pt-10 pb-6 mt-8 no-line-decor">
+    <section className="text-black pt-6 sm:pt-10 pb-6 mt-8 no-line-decor overflow-hidden">
       <ServiceAnimationStyles />
       <div className="w-full max-w-[1440px] mx-auto px-[10px] sm:px-6 md:px-8 lg:px-10">
         {/* Heading */}
@@ -126,13 +137,14 @@ const Services = () => {
             and academic event management.
           </p>
         </div>
-        {/* Cards Structural Grid Area */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+
+        {/* Updated Container Layout: Left-to-Right Side Scroll on Mobile, Standard Grid on Desktop */}
+        <div className="flex md:grid md:grid-cols-2 lg:grid-cols-3 gap-8 overflow-x-auto md:overflow-x-visible pb-4 md:pb-0 hide-scrollbar snap-x snap-mandatory">
           {services.map((item, i) => (
             <div
               key={i}
               onClick={() => handleCardNavigation(item.link)}
-              className={`skew-animated-card ${item.slantClass} p-6 rounded-3xl text-white hover:shadow-2xl flex flex-col justify-between h-[360px] group cursor-pointer no-line-decor`}
+              className={`skew-animated-card ${item.slantClass} p-6 rounded-3xl text-white hover:shadow-2xl flex flex-col justify-between h-[360px] group cursor-pointer no-line-decor min-w-[calc(100vw-20px)] md:min-w-0 snap-center px-1 md:px-0`}
             >
               {/* Inner Layout Container */}
               <div className="relative z-10 w-full flex flex-col">
