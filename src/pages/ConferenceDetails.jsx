@@ -10,6 +10,9 @@ const ConferenceDetails = () => {
   const [showSystem, setShowSystem] = useState(false);
   const [showProfile, setShowProfile] = useState(false);
 
+  // Track which FAQ item is expanded
+  const [expandedFaq, setExpandedFaq] = useState(null);
+
   const toggleHelp = (e) => {
     e.stopPropagation();
     setShowHelp(!showHelp);
@@ -49,6 +52,26 @@ const ConferenceDetails = () => {
     setShowProfile(false);
   };
 
+  const toggleFaqItem = (index, e) => {
+    e.stopPropagation();
+    setExpandedFaq(expandedFaq === index ? null : index);
+  };
+
+  const faqData = [
+    {
+      q: "How do I create a submission?",
+      a: "Click on the '+ Create New Site Request' or 'Submit Paper' button in your console dashboard, fill out the track metrics, metadata, and upload your PDF."
+    },
+    {
+      q: "How do I check submission status?",
+      a: "Navigate to the 'Author Dashboard' or 'My Submissions'. The status column updates dynamically as reviewers submit details."
+    },
+    {
+      q: "How do I edit my submission?",
+      a: "As long as the editing window is open, click the 'Actions' button next to your submission row to upload revisions or update author strings."
+    }
+  ];
+
   return (
     <section className="min-h-screen bg-gray-100" onClick={closeAllMenus}>
       {/* NAVBAR */}
@@ -62,24 +85,38 @@ const ConferenceDetails = () => {
             Submissions
           </h1>
           {/* RIGHT SIDE */}
-          <div className="flex flex-wrap items-center gap-4">
+          <div className="flex flex-wrap items-center justify-center md:justify-end gap-4 w-full md:w-auto">
             {/* HELP CENTER */}
             <div className="relative">
               <button
                 onClick={toggleHelp}
-                /* CHANGED: Swapped hover:text-yellow-200 with theme matching hover:text-purple-200 */
                 className="flex items-center gap-2 hover:text-purple-200 transition-colors"
               >
                 <HelpCircle size={18} />
                 Help Center
               </button>
               {showHelp && (
-                <div className="absolute right-0 mt-3 w-72 bg-white text-black rounded-xl shadow-xl p-4 z-50" onClick={(e) => e.stopPropagation()}>
-                  <h3 className="font-bold mb-3">Help Center</h3>
-                  <div className="space-y-3 text-sm">
-                    <p>How do I create a submission?</p>
-                    <p>How do I check submission status?</p>
-                    <p>How do I edit my submission?</p>
+                <div className="absolute right-1/2 translate-x-1/2 md:translate-x-0 md:right-0 mt-3 w-80 bg-white text-black rounded-2xl shadow-2xl p-4 z-50 overflow-hidden border border-gray-100" onClick={(e) => e.stopPropagation()}>
+                  <div className="bg-gradient-to-r from-blue-600 to-purple-700 mx-[-16px] mt-[-16px] mb-3 px-4 py-3 text-white">
+                    <h3 className="font-bold text-sm tracking-wide">Help Center Support</h3>
+                  </div>
+                  <div className="space-y-2 max-h-[280px] overflow-y-auto pr-1">
+                    {faqData.map((faq, idx) => (
+                      <div key={idx} className="border border-gray-100 rounded-xl overflow-hidden">
+                        <button
+                          onClick={(e) => toggleFaqItem(idx, e)}
+                          className="w-full text-left px-3 py-2.5 bg-gray-50/80 hover:bg-blue-50/50 flex items-center justify-between gap-2 text-xs font-bold text-gray-700 transition-colors"
+                        >
+                          <span>{faq.q}</span>
+                          <ChevronDown size={14} className={`flex-shrink-0 text-gray-400 transition-transform duration-200 ${expandedFaq === idx ? "rotate-180 text-purple-600" : ""}`} />
+                        </button>
+                        {expandedFaq === idx && (
+                          <div className="px-3 py-2.5 text-[11px] leading-relaxed text-gray-600 bg-white border-t border-gray-50 animate-fadeIn">
+                            {faq.a}
+                          </div>
+                        )}
+                      </div>
+                    ))}
                   </div>
                 </div>
               )}
@@ -94,7 +131,7 @@ const ConferenceDetails = () => {
                 <ChevronDown size={16} />
               </button>
               {showAuthor && (
-                <div className="absolute right-0 mt-3 bg-white text-black rounded-xl shadow-xl w-48 overflow-hidden z-50" onClick={(e) => e.stopPropagation()}>
+                <div className="absolute right-1/2 translate-x-1/2 md:translate-x-0 md:right-0 mt-3 bg-white text-black rounded-xl shadow-xl w-48 overflow-hidden z-50" onClick={(e) => e.stopPropagation()}>
                   <button className="w-full text-left px-4 py-3 hover:bg-blue-50/60 hover:text-purple-700 transition-all duration-200 text-gray-700">
                     My Submissions
                   </button>
@@ -114,7 +151,7 @@ const ConferenceDetails = () => {
                 <ChevronDown size={16} />
               </button>
               {showSystem && (
-                <div className="absolute right-0 mt-3 bg-white text-black rounded-xl shadow-xl w-48 overflow-hidden z-50" onClick={(e) => e.stopPropagation()}>
+                <div className="absolute right-1/2 translate-x-1/2 md:translate-x-0 md:right-0 mt-3 bg-white text-black rounded-xl shadow-xl w-48 overflow-hidden z-50" onClick={(e) => e.stopPropagation()}>
                   <button
                     onClick={() => navigate("/conference-dashboard")}
                     className="w-full text-left px-4 py-3 hover:bg-blue-50/60 hover:text-purple-700 transition-all duration-200 text-gray-700"
@@ -131,7 +168,6 @@ const ConferenceDetails = () => {
             <div className="relative">
               <button
                 onClick={toggleProfile}
-                /* CHANGED: Swapped hover:text-yellow-200 out for theme matching hover:text-purple-200 */
                 className="flex items-center gap-2 hover:text-purple-200 transition-all duration-300"
               >
                 {/* PROFILE IMAGE */}
@@ -145,20 +181,19 @@ const ConferenceDetails = () => {
                 {/* ARROW */}
                 <ChevronDown size={18} className={`transition-transform duration-300 ${showProfile ? "rotate-180" : ""}`} />
               </button>
-              {/* DROPDOWN */}
+              {/* DROPDOWN - FIXED MOBILE CLIPPING */}
               {showProfile && (
-                <div className="absolute right-0 mt-4 w-[92vw] sm:w-[320px] rounded-3xl shadow-2xl overflow-hidden z-50 animate-fadeIn bg-white text-black" onClick={(e) => e.stopPropagation()}>
+                <div className="absolute right-[-20px] sm:right-0 mt-4 w-[290px] sm:w-[320px] rounded-3xl shadow-2xl overflow-hidden z-50 animate-fadeIn bg-white text-black" onClick={(e) => e.stopPropagation()}>
                   {/* TOP PROFILE CARD */}
-                  {/* CHANGED: Replaced to-yellow-500 with to-indigo-900 for the blue, purple, and indigo theme flow */}
                   <div className="bg-gradient-to-r from-blue-600 via-purple-600 to-indigo-900 p-5 text-white">
                     <div className="flex items-center gap-4">
-                      <div className="w-16 h-16 rounded-full bg-white/20 flex items-center justify-center text-2xl font-bold border border-white/30">
+                      <div className="w-14 h-14 sm:w-16 sm:h-16 rounded-full bg-white/20 flex items-center justify-center text-xl sm:text-2xl font-bold border border-white/30 flex-shrink-0">
                         AG
                       </div>
-                      <div>
-                        <h3 className="font-bold text-lg">Ashwani Gupta</h3>
-                        <p className="text-sm text-white/90">admin@academicsutra.com</p>
-                        <span className="inline-block mt-2 text-xs bg-white/20 px-3 py-1 rounded-full">Super Admin</span>
+                      <div className="overflow-hidden">
+                        <h3 className="font-bold text-base sm:text-lg truncate">Ashwani Gupta</h3>
+                        <p className="text-xs sm:text-sm text-white/90 truncate">admin@academicsutra.com</p>
+                        <span className="inline-block mt-2 text-[10px] sm:text-xs bg-white/20 px-3 py-1 rounded-full">Super Admin</span>
                       </div>
                     </div>
                   </div>
@@ -167,7 +202,6 @@ const ConferenceDetails = () => {
                     {/* PROFILE */}
                     <button
                       onClick={() => navigate("/profile")}
-                      /* CHANGED: Swapped hover:bg-gray-100 out for blue-purple theme hover styling */
                       className="w-full flex items-center gap-4 px-5 py-4 hover:bg-blue-50/60 hover:text-purple-700 transition-all duration-200 text-gray-700"
                     >
                       <User size={20} />
@@ -179,7 +213,6 @@ const ConferenceDetails = () => {
                     {/* SETTINGS */}
                     <button
                       onClick={() => navigate("/settings")}
-                      /* CHANGED: Swapped hover:bg-gray-100 out for blue-purple theme hover styling */
                       className="w-full flex items-center gap-4 px-5 py-4 hover:bg-blue-50/60 hover:text-purple-700 transition-all duration-200 text-gray-700"
                     >
                       <Settings size={20} />
@@ -191,7 +224,6 @@ const ConferenceDetails = () => {
                     {/* NOTIFICATIONS */}
                     <button
                       onClick={() => navigate("/notifications")}
-                      /* CHANGED: Swapped hover:bg-gray-100 out for blue-purple theme hover styling */
                       className="w-full flex items-center gap-4 px-5 py-4 hover:bg-blue-50/60 hover:text-purple-700 transition-all duration-200 text-gray-700"
                     >
                       <Bell size={20} />
@@ -203,7 +235,6 @@ const ConferenceDetails = () => {
                     {/* DARK MODE */}
                     <button
                       onClick={() => alert("Dark mode toggle logic")}
-                      /* CHANGED: Swapped hover:bg-gray-100 out for blue-purple theme hover styling */
                       className="w-full flex items-center gap-4 px-5 py-4 hover:bg-blue-50/60 hover:text-purple-700 transition-all duration-200 text-gray-700"
                     >
                       <Moon size={20} />
@@ -215,7 +246,6 @@ const ConferenceDetails = () => {
                     {/* CHANGE PASSWORD */}
                     <button
                       onClick={() => navigate("/change-password")}
-                      /* CHANGED: Swapped hover:bg-gray-100 out for blue-purple theme hover styling */
                       className="w-full flex items-center gap-4 px-5 py-4 hover:bg-blue-50/60 hover:text-purple-700 transition-all duration-200 text-gray-700"
                     >
                       <Lock size={20} />
