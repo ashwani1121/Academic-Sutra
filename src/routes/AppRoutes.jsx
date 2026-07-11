@@ -20,19 +20,15 @@ const AppRoutes = () => {
         element={<ConferenceDashboard />}
       />
       <Route path="/profile" element={<Profile />} />
-
       <Route path="/settings" element={<Settings />} />
-
       <Route
         path="/notifications"
         element={<Notifications />}
       />
-
       <Route
         path="/change-password"
         element={<ChangePassword />}
       />
-
       <Route
         path="/conference/:id"
         element={<ConferenceDetails />}

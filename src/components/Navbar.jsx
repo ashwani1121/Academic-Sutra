@@ -6,17 +6,8 @@ const Navbar = () => {
   const [open, setOpen] = useState(false);
   const [showContact, setShowContact] = useState(false);
   const dropdownRef = useRef(null);
+  const navItems = ["HOME", "ABOUT", "SERVICES", "FEATURES", "WHY US", "CONTACT"];
 
-  const navItems = [
-    "HOME",
-    "ABOUT",
-    "SERVICES",
-    "FEATURES",
-    "WHY US",
-    "CONTACT",
-  ];
-
-  // Close dropdown if clicking outside of it
   useEffect(() => {
     const handleOutsideClick = (event) => {
       if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
@@ -33,12 +24,8 @@ const Navbar = () => {
     } else {
       setShowContact(false);
       setOpen(false);
-
       if (item === "HOME") {
-        window.scrollTo({
-          top: 0,
-          behavior: "smooth",
-        });
+        window.scrollTo({ top: 0, behavior: "smooth" });
       } else {
         const targetElement = document.querySelector(sectionId);
         if (targetElement) {
@@ -50,11 +37,8 @@ const Navbar = () => {
 
   return (
     <header className="w-full fixed top-0 left-0 z-50 bg-white/90 backdrop-blur-md shadow-sm">
-      
-      {/* Responsive Container */}
       <div className="w-full max-w-[1440px] mx-auto px-[10px] sm:px-6 md:px-8 lg:px-10">
         <div className="flex items-center justify-between h-16">
-
           {/* Logo */}
           <Link
             to="/"
@@ -64,11 +48,10 @@ const Navbar = () => {
             }}
             className="flex items-center gap-2"
           >
-            <div className="w-8 h-8 sm:w-9 sm:h-9 flex items-center justify-center rounded-full bg-gradient-to-r from-yellow-400 via-blue-500 to-purple-500 text-white font-bold text-xs sm:text-sm">
+            <div className="w-8 h-8 sm:w-9 sm:h-9 flex items-center justify-center rounded-full bg-gradient-to-r from-blue-600 to-purple-700 text-white font-bold text-xs sm:text-sm">
               AS
             </div>
-
-            <h1 className="text-base sm:text-lg md:text-xl lg:text-2xl font-bold bg-gradient-to-r from-yellow-400 via-blue-500 to-purple-500 bg-clip-text text-transparent">
+            <h1 className="text-base sm:text-lg md:text-xl lg:text-2xl font-bold bg-gradient-to-r from-blue-600 to-purple-700 bg-clip-text text-transparent">
               Academic Sutra
             </h1>
           </Link>
@@ -76,40 +59,31 @@ const Navbar = () => {
           {/* Desktop Menu */}
           <nav className="hidden md:flex items-center space-x-6 lg:space-x-8 text-sm lg:text-base font-medium text-gray-800">
             {navItems.map((item, i) => {
-              const sectionId =
-                item === "HOME"
-                  ? "/"
-                  : `#${item.toLowerCase().replace(" ", "")}`;
-
+              const sectionId = item === "HOME" ? "/" : `#${item.toLowerCase().replace(" ", "")}`;
               if (item === "CONTACT") {
                 return (
                   <div key={i} className="relative" ref={dropdownRef}>
                     <button
                       onClick={() => handleItemAction(item, sectionId)}
-                      className="relative border-none bg-transparent font-medium text-sm lg:text-base text-gray-800 cursor-pointer after:content-[''] after:absolute after:w-0 after:h-[2px] after:left-0 after:-bottom-1 after:bg-gradient-to-r after:from-yellow-400 after:to-blue-500 after:transition-all after:duration-300 hover:after:w-full hover:bg-gradient-to-r hover:from-yellow-400 hover:to-blue-500 hover:bg-clip-text hover:text-transparent focus:outline-none"
+                      className="relative border-none bg-transparent font-medium text-sm lg:text-base text-gray-800 cursor-pointer after:content-[''] after:absolute after:w-0 after:h-[2px] after:left-0 after:-bottom-1 after:bg-gradient-to-r after:from-blue-600 after:to-purple-700 after:transition-all after:duration-300 hover:after:w-full hover:bg-gradient-to-r hover:from-blue-600 hover:to-purple-700 hover:bg-clip-text hover:text-transparent focus:outline-none"
                     >
                       {item}
                     </button>
-
-                    {/* PROFESSIONAL DESKTOP FLOATING CARD */}
+                    {/* Floating Contact Card */}
                     {showContact && (
                       <div className="absolute right-0 mt-3 w-80 bg-white rounded-2xl shadow-xl border border-gray-100 p-5 z-50 transform origin-top-right transition-all duration-200">
                         <div className="space-y-4 text-left">
-                          
-                          {/* PHONE CARD */}
                           <a href="tel:+916200998560" className="flex items-center gap-3 p-2 rounded-xl hover:bg-gray-50 transition duration-200 group block" style={{ textDecoration: 'none' }}>
-                            <div className="w-9 h-9 rounded-lg bg-yellow-50 text-yellow-600 flex items-center justify-center shrink-0">
+                            <div className="w-9 h-9 rounded-lg bg-blue-50 text-blue-600 flex items-center justify-center shrink-0">
                               <Phone size={16} />
                             </div>
                             <div>
                               <span className="text-[10px] font-black text-gray-600 tracking-wider block uppercase mb-0.5">Call Hotline</span>
-                              <span className="text-sm font-bold text-gray-800 group-hover:text-blue-600 transition-colors">+(91) 6200998560</span>
+                              <span className="text-sm font-bold text-gray-800 group-hover:text-purple-600 transition-colors">+(91) 6200998560</span>
                             </div>
                           </a>
-
-                          {/* EMAIL CARD */}
                           <a href="mailto:support@academicsutra.com" className="flex items-center gap-3 p-2 rounded-xl hover:bg-gray-50 transition duration-200 group block" style={{ textDecoration: 'none' }}>
-                            <div className="w-9 h-9 rounded-lg bg-blue-50 text-blue-600 flex items-center justify-center shrink-0">
+                            <div className="w-9 h-9 rounded-lg bg-purple-50 text-purple-600 flex items-center justify-center shrink-0">
                               <Mail size={16} />
                             </div>
                             <div>
@@ -117,10 +91,8 @@ const Navbar = () => {
                               <span className="text-sm font-bold text-gray-800 group-hover:text-blue-600 transition-colors">support@academicsutra.com</span>
                             </div>
                           </a>
-
-                          {/* LOCATION */}
                           <div className="flex items-start gap-3 p-3 rounded-xl bg-slate-50 border border-slate-100">
-                            <div className="w-9 h-9 rounded-lg bg-purple-50 text-purple-600 flex items-center justify-center shrink-0 mt-0.5">
+                            <div className="w-9 h-9 rounded-lg bg-blue-50 text-blue-600 flex items-center justify-center shrink-0 mt-0.5">
                               <MapPin size={16} />
                             </div>
                             <div>
@@ -130,19 +102,17 @@ const Navbar = () => {
                               </span>
                             </div>
                           </div>
-
                         </div>
                       </div>
                     )}
                   </div>
                 );
               }
-
               return item === "HOME" ? (
                 <button
                   key={i}
                   onClick={() => handleItemAction(item, sectionId)}
-                  className="relative border-none bg-transparent font-medium text-sm lg:text-base text-gray-800 cursor-pointer after:content-[''] after:absolute after:w-0 after:h-[2px] after:left-0 after:-bottom-1 after:bg-gradient-to-r after:from-yellow-400 after:to-blue-500 after:transition-all after:duration-300 hover:after:w-full hover:bg-gradient-to-r hover:from-yellow-400 hover:to-blue-500 hover:bg-clip-text hover:text-transparent"
+                  className="relative border-none bg-transparent font-medium text-sm lg:text-base text-gray-800 cursor-pointer after:content-[''] after:absolute after:w-0 after:h-[2px] after:left-0 after:-bottom-1 after:bg-gradient-to-r after:from-blue-600 after:to-purple-700 after:transition-all after:duration-300 hover:after:w-full hover:bg-gradient-to-r hover:from-blue-600 hover:to-purple-700 hover:bg-clip-text hover:text-transparent"
                 >
                   {item}
                 </button>
@@ -151,7 +121,7 @@ const Navbar = () => {
                   key={i}
                   href={sectionId}
                   onClick={() => setShowContact(false)}
-                  className="relative after:content-[''] after:absolute after:w-0 after:h-[2px] after:left-0 after:-bottom-1 after:bg-gradient-to-r after:from-yellow-400 after:to-blue-500 after:transition-all after:duration-300 hover:after:w-full hover:bg-gradient-to-r hover:from-yellow-400 hover:to-blue-500 hover:bg-clip-text hover:text-transparent"
+                  className="relative after:content-[''] after:absolute after:w-0 after:h-[2px] after:left-0 after:-bottom-1 after:bg-gradient-to-r after:from-blue-600 after:to-purple-700 after:transition-all after:duration-300 hover:after:w-full hover:bg-gradient-to-r hover:from-blue-600 hover:to-purple-700 hover:bg-clip-text hover:text-transparent"
                 >
                   {item}
                 </a>
@@ -166,9 +136,8 @@ const Navbar = () => {
                 Login
               </button>
             </Link>
-
             <Link to="/signup" onClick={() => setShowContact(false)}>
-              <button className="px-4 py-2 text-black rounded font-medium text-sm bg-gradient-to-r from-yellow-400 to-blue-500 hover:shadow-lg transition duration-300">
+              <button className="px-4 py-2 text-white rounded font-medium text-sm bg-gradient-to-r from-blue-600 to-purple-700 hover:from-blue-700 hover:to-purple-800 hover:shadow-lg transition duration-300">
                 Sign Up
               </button>
             </Link>
@@ -180,7 +149,6 @@ const Navbar = () => {
               {open ? <X size={26} /> : <Menu size={26} />}
             </button>
           </div>
-
         </div>
       </div>
 
@@ -188,11 +156,7 @@ const Navbar = () => {
       {open && (
         <div className="md:hidden bg-white border-t px-[10px] sm:px-6 py-4 space-y-4 text-gray-800">
           {navItems.map((item, i) => {
-            const sectionId =
-              item === "HOME"
-                ? "/"
-                : `#${item.toLowerCase().replace(" ", "")}`;
-
+            const sectionId = item === "HOME" ? "/" : `#${item.toLowerCase().replace(" ", "")}`;
             if (item === "CONTACT") {
               return (
                 <div key={i} className="space-y-2">
@@ -202,16 +166,14 @@ const Navbar = () => {
                   >
                     {item}
                   </button>
-
-                  {/* INLINE EXPANSION PANEL FOR MOBILE FRAMES */}
                   {showContact && (
                     <div className="pl-3 border-l-2 border-gray-100 space-y-3 pt-1 pb-2">
                       <a href="tel:+916200998560" className="flex items-center gap-2.5 text-xs font-semibold text-gray-700" style={{ textDecoration: 'none' }}>
-                        <Phone size={14} className="text-yellow-500" />
+                        <Phone size={14} className="text-blue-600" />
                         <span>+(91) 6200998560</span>
                       </a>
                       <a href="mailto:support@academicsutra.com" className="flex items-center gap-2.5 text-xs font-semibold text-gray-700" style={{ textDecoration: 'none' }}>
-                        <Mail size={14} className="text-blue-500" />
+                        <Mail size={14} className="text-purple-600" />
                         <span>support@academicsutra.com</span>
                       </a>
                     </div>
@@ -219,7 +181,6 @@ const Navbar = () => {
                 </div>
               );
             }
-
             return item === "HOME" ? (
               <button
                 key={i}
@@ -247,16 +208,14 @@ const Navbar = () => {
                 Login
               </button>
             </Link>
-
             <Link to="/signup" onClick={() => setOpen(false)}>
-              <button className="w-full bg-yellow-400 py-2 rounded font-medium text-sm">
+              <button className="w-full bg-gradient-to-r from-blue-600 to-purple-700 text-white py-2 rounded font-medium text-sm">
                 Sign Up
               </button>
             </Link>
           </div>
         </div>
       )}
-
     </header>
   );
 };

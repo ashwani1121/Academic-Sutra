@@ -13,7 +13,6 @@ const ServiceAnimationStyles = () => (
       border-bottom: none !important;
       box-shadow: none !important;
     }
-
     /* Skewed Background Element Panel Mask Setup */
     .skew-animated-card {
       position: relative;
@@ -22,7 +21,6 @@ const ServiceAnimationStyles = () => (
       background: transparent !important; /* Managed via pseudo-elements */
       transition: all 0.4s ease-in-out;
     }
-
     .skew-animated-card::before {
       content: "";
       position: absolute;
@@ -34,17 +32,14 @@ const ServiceAnimationStyles = () => (
       z-index: -1;
       transition: all 0.4s ease-in-out;
     }
-
     /* Assign distinct background themes matching card metrics data instances */
     .card-slant-1::before { background: linear-gradient(135deg, #334155, #0f172a); }
     .card-slant-2::before { background: linear-gradient(135deg, #1d4ed8, #312e81); }
     .card-slant-3::before { background: linear-gradient(135deg, #374151, #111827); }
-
     /* Morph backdrops into high-contrast highlighted accent states on hover */
     .card-slant-1:hover::before { background: linear-gradient(135deg, #06b6d4, #0891b2); }
     .card-slant-2:hover::before { background: linear-gradient(135deg, #2563eb, #1d4ed8); }
     .card-slant-3:hover::before { background: linear-gradient(135deg, #7c3aed, #6d28d9); }
-
     /* Skewed Graphic Outer Frame Container block */
     .skew-graphic-box {
       position: relative;
@@ -55,7 +50,6 @@ const ServiceAnimationStyles = () => (
       justify-content: center;
       margin-bottom: 1.25rem;
     }
-
     .skew-graphic-box::before {
       content: "";
       position: absolute;
@@ -70,14 +64,12 @@ const ServiceAnimationStyles = () => (
       transition: all 0.4s ease-in-out;
       z-index: 0;
     }
-
     /* Illuminate border mask box when parent card is active */
     .skew-animated-card:hover .skew-graphic-box::before {
       background: rgba(255, 255, 255, 0.12);
       border-color: #ffffff;
       transform: skew(-15deg, 0deg) scale(1.02);
     }
-
     /* Slide Entrance animation configuration tracking for Read More trigger */
     .sliding-arrow-cta {
       transform: translateX(-6px);
@@ -85,7 +77,6 @@ const ServiceAnimationStyles = () => (
       visibility: hidden;
       transition: all 0.35s cubic-bezier(0.25, 1, 0.5, 1);
     }
-
     .skew-animated-card:hover .sliding-arrow-cta {
       transform: translateX(0);
       opacity: 1;
@@ -116,7 +107,6 @@ const services = [
 ];
 
 const Services = () => {
-  // Navigation handler to completely circumvent browser link element validation bugs
   const handleCardNavigation = (url) => {
     window.location.href = url;
   };
@@ -124,13 +114,10 @@ const Services = () => {
   return (
     <section className="text-black pt-6 sm:pt-10 pb-6 mt-8 no-line-decor">
       <ServiceAnimationStyles />
-
-      {/* Grid wrapper configurations keep margins standard across pages */}
       <div className="w-full max-w-[1440px] mx-auto px-[10px] sm:px-6 md:px-8 lg:px-10">
-
         {/* Heading */}
         <div className="mb-12">
-          <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-4 bg-gradient-to-r from-blue-700 to-indigo-900 bg-clip-text text-transparent">
+          <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-4 bg-gradient-to-r from-blue-600 via-purple-600 to-indigo-900 bg-clip-text text-transparent">
             Conference Services
           </h2>
           <p className="text-sm sm:text-base md:text-lg text-gray-600 max-w-3xl leading-7">
@@ -139,7 +126,6 @@ const Services = () => {
             and academic event management.
           </p>
         </div>
-
         {/* Cards Structural Grid Area */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {services.map((item, i) => (
@@ -150,7 +136,6 @@ const Services = () => {
             >
               {/* Inner Layout Container */}
               <div className="relative z-10 w-full flex flex-col">
-                
                 {/* Skewed Graphic Image Box Element */}
                 <div className="skew-graphic-box">
                   <img
@@ -159,20 +144,16 @@ const Services = () => {
                     className="relative z-10 w-auto h-[80%] max-h-36 object-contain group-hover:scale-105 transition-transform duration-500"
                   />
                 </div>
-
                 {/* Card Header Title */}
                 <h3 className="text-xl font-bold mb-2 text-white tracking-wide transition-colors duration-300 line-clamp-1 !mt-2">
                   {item.title}
                 </h3>
-                
                 {/* Description Copy */}
                 <p className="text-xs sm:text-sm text-gray-300 group-hover:text-white/90 leading-relaxed line-clamp-2 transition-colors duration-300">
                   Submit research papers, abstracts, and academic articles for conferences.
                 </p>
-
               </div>
-
-              {/* Read More Action Button - Flex container keeps layout right next to each other */}
+              {/* Read More Action Button */}
               <div className="relative z-10 pt-3 border-t border-white/10 mt-auto w-full flex justify-start items-center no-line-decor">
                 <span className="text-[11px] uppercase tracking-widest font-black text-white inline-flex items-center">
                   Read More
@@ -181,11 +162,9 @@ const Services = () => {
                   </span>
                 </span>
               </div>
-
             </div>
           ))}
         </div>
-
       </div>
     </section>
   );

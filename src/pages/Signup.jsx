@@ -3,9 +3,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { Eye, EyeOff } from "lucide-react";
 
 const Signup = () => {
-
   const navigate = useNavigate();
-
   const [showPassword, setShowPassword] = useState(false);
 
   const [formData, setFormData] = useState({
@@ -44,101 +42,85 @@ const Signup = () => {
   };
 
   const handleSignup = () => {
-
     if (formData.password !== formData.confirmPassword) {
       alert("Passwords do not match");
       return;
     }
-
     localStorage.setItem(
       "academicUser",
       JSON.stringify(formData)
     );
-
     alert("Registration Successful");
-
     navigate("/login");
   };
 
   return (
     <div className="min-h-screen bg-gray-100 flex items-center justify-center px-4 py-10">
-
       <div className="w-full max-w-6xl bg-white rounded-3xl shadow-2xl overflow-hidden grid lg:grid-cols-2">
-
         {/* LEFT SIDE */}
         <div
           className="
             hidden lg:flex
             flex-col justify-center
-            bg-gradient-to-br from-blue-700 to-indigo-900
+            bg-gradient-to-br from-blue-600 to-purple-700
             text-white
             p-12
           "
         >
-
           <h1 className="text-5xl font-bold mb-6 leading-tight">
             Academic <br /> Sutra
           </h1>
-
           <p className="text-lg text-gray-200 leading-8">
             Join the modern conference management platform
             for researchers, authors, reviewers, and academic institutions.
           </p>
-
         </div>
 
         {/* RIGHT SIDE */}
         <div className="p-6 sm:p-10">
-
           <h2 className="text-3xl font-bold text-gray-800 mb-2">
             Create Account
           </h2>
-
           <p className="text-gray-500 mb-8">
             Register to access conference and research services.
           </p>
 
           {/* FORM */}
           <div className="grid sm:grid-cols-2 gap-5">
-
             <input
               type="text"
               name="firstName"
-              placeholder="First Name"
+              placeholder="First Name *"
               onChange={handleChange}
               className={inputStyle}
             />
-
             <input
               type="text"
               name="lastName"
-              placeholder="Last Name"
+              placeholder="Last Name *"
               onChange={handleChange}
               className={inputStyle}
             />
-
             <input
               type="email"
               name="email"
-              placeholder="Email Address"
+              placeholder="Email Address *"
               onChange={handleChange}
               className={`${inputStyle} sm:col-span-2`}
             />
-
             <input
               type="text"
               name="mobile"
-              placeholder="Mobile Number"
+              placeholder="Mobile Number *"
               onChange={handleChange}
               className={inputStyle}
             />
-
             <select
               name="organization"
               onChange={handleChange}
               className={inputStyle}
             >
-              <option value="">Select Organization</option>
+              <option value="">Select Organization *</option>
               <option value="IIT Delhi">IIT Delhi</option>
               <option value="IIT Bombay">IIT Bombay</option>
               <option value="IIT Madras">IIT Madras</option>
@@ -151,13 +133,12 @@ const Signup = () => {
                 Private Research Organization
               </option>
             </select>
-
             <select
               name="country"
               onChange={handleChange}
               className={inputStyle}
             >
-              <option value="">Select Country</option>
+              <option value="">Select Country *</option>
               <option value="India">🇮🇳 India</option>
               <option value="United States">🇺🇸 United States</option>
               <option value="United Kingdom">🇬🇧 United Kingdom</option>
@@ -169,7 +150,6 @@ const Signup = () => {
               <option value="Singapore">🇸🇬 Singapore</option>
               <option value="France">🇫🇷 France</option>
             </select>
-
             <input
               type="text"
               name="scholarId"
@@ -177,7 +157,6 @@ const Signup = () => {
               onChange={handleChange}
               className={inputStyle}
             />
-
             <input
               type="text"
               name="orcidId"
@@ -185,7 +164,6 @@ const Signup = () => {
               onChange={handleChange}
               className={`${inputStyle} sm:col-span-2`}
             />
-
             <input
               type="text"
               name="dblpId"
@@ -196,36 +174,25 @@ const Signup = () => {
 
             {/* PASSWORD */}
             <div className="relative">
-
               <input
                 type={showPassword ? "text" : "password"}
                 name="password"
-                placeholder="Password"
+                placeholder="Password *"
                 onChange={handleChange}
                 className={`${inputStyle} pr-12`}
               />
-
               <button
                 type="button"
                 onClick={() => setShowPassword(!showPassword)}
-                className="
-                  absolute right-4 top-1/2
-                  -translate-y-1/2 text-gray-500
-                "
+                className="absolute right-4 top-1/2 -translate-y-1/2 text-gray-500"
               >
-                {showPassword ? (
-                  <EyeOff size={18} />
-                ) : (
-                  <Eye size={18} />
-                )}
+                {showPassword ? <EyeOff size={18} /> : <Eye size={18} />}
               </button>
-
             </div>
-
             <input
               type="password"
               name="confirmPassword"
-              placeholder="Confirm Password"
+              placeholder="Confirm Password *"
               onChange={handleChange}
               className={inputStyle}
             />
@@ -233,9 +200,7 @@ const Signup = () => {
 
           {/* TERMS */}
           <div className="flex items-start gap-3 mt-6">
-
             <input type="checkbox" className="mt-1" />
-
             <p className="text-sm text-gray-600 leading-6">
               I agree to the Terms of Service, Privacy Policy,
               and conference data policies.
@@ -247,9 +212,10 @@ const Signup = () => {
             onClick={handleSignup}
             className="
               w-full mt-6 py-3 rounded-xl
-              bg-gradient-to-r from-blue-700 to-indigo-900
+              bg-gradient-to-r from-blue-600 to-purple-700
+              hover:from-blue-700 hover:to-purple-800
               text-white font-semibold
-              hover:opacity-90 transition
+              transition-all duration-300
             "
           >
             Create Account
@@ -257,27 +223,23 @@ const Signup = () => {
 
           {/* LOGIN */}
           <div className="text-center mt-6 text-sm">
-
             <span className="text-gray-600">
               Already have an account?
             </span>
-
             <Link
               to="/login"
               className="
-                ml-2 font-semibold text-blue-700
-                hover:underline
+                ml-2 font-semibold text-blue-600
+                hover:bg-gradient-to-r hover:from-blue-600 hover:to-purple-700
+                hover:bg-clip-text hover:text-transparent
+                transition-all duration-300
               "
             >
               Login
             </Link>
-
           </div>
-
         </div>
-
       </div>
-
     </div>
   );
 };
