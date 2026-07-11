@@ -1,4 +1,5 @@
 import React from "react";
+// 1. Keep useNavigate hook to safely prevent 404 errors on routing
 import { useNavigate } from "react-router-dom"; 
 import cmpImage from "../assets/cmp.png";
 import lmsImage from "../assets/lms.png";
@@ -83,13 +84,19 @@ const ServiceAnimationStyles = () => (
       opacity: 1;
       visibility: visible;
     }
-    /* Hide scrollbars across various dynamic screen widths */
-    .hide-scrollbar::-webkit-scrollbar {
-      display: none;
+    
+    /* Native global fallbacks to ensure production rendering mirrors localhost exactly */
+    .fallback-clamp-1 {
+      display: -webkit-box !important;
+      -webkit-line-clamp: 1 !important;
+      -webkit-box-orient: vertical !important;
+      overflow: hidden !important;
     }
-    .hide-scrollbar {
-      -ms-overflow-style: none;
-      scrollbar-width: none;
+    .fallback-clamp-2 {
+      display: -webkit-box !important;
+      -webkit-line-clamp: 2 !important;
+      -webkit-box-orient: vertical !important;
+      overflow: hidden !important;
     }
   `}</style>
 );
@@ -119,11 +126,11 @@ const Services = () => {
   const navigate = useNavigate();
 
   const handleCardNavigation = (url) => {
-    navigate(url); 
+    navigate(url);
   };
 
   return (
-    <section className="text-black pt-6 sm:pt-10 pb-6 mt-8 no-line-decor overflow-hidden">
+    <section className="text-black pt-6 sm:pt-10 pb-6 mt-8 no-line-decor">
       <ServiceAnimationStyles />
       <div className="w-full max-w-[1440px] mx-auto px-[10px] sm:px-6 md:px-8 lg:px-10">
         {/* Heading */}
@@ -137,14 +144,13 @@ const Services = () => {
             and academic event management.
           </p>
         </div>
-
-        {/* Updated Container Layout: Left-to-Right Side Scroll on Mobile, Standard Grid on Desktop */}
-        <div className="flex md:grid md:grid-cols-2 lg:grid-cols-3 gap-8 overflow-x-auto md:overflow-x-visible pb-4 md:pb-0 hide-scrollbar snap-x snap-mandatory">
+        {/* Cards Structural Grid Area */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {services.map((item, i) => (
             <div
               key={i}
               onClick={() => handleCardNavigation(item.link)}
-              className={`skew-animated-card ${item.slantClass} p-6 rounded-3xl text-white hover:shadow-2xl flex flex-col justify-between h-[360px] group cursor-pointer no-line-decor min-w-[calc(100vw-20px)] md:min-w-0 snap-center px-1 md:px-0`}
+              className={`skew-animated-card ${item.slantClass} p-6 rounded-3xl text-white hover:shadow-2xl flex flex-col justify-between h-[360px] group cursor-pointer no-line-decor`}
             >
               {/* Inner Layout Container */}
               <div className="relative z-10 w-full flex flex-col">
@@ -157,11 +163,13 @@ const Services = () => {
                   />
                 </div>
                 {/* Card Header Title */}
-                <h3 className="text-xl font-bold mb-2 text-white tracking-wide transition-colors duration-300 line-clamp-1 !mt-2">
+                {/* CHANGED: Added fallback-clamp-1 to protect heading heights in production */}
+                <h3 className="text-xl font-bold mb-2 text-white tracking-wide transition-colors duration-300 line-clamp-1 fallback-clamp-1 !mt-2">
                   {item.title}
                 </h3>
                 {/* Description Copy */}
-                <p className="text-xs sm:text-sm text-gray-300 group-hover:text-white/90 leading-relaxed line-clamp-2 transition-colors duration-300">
+                {/* CHANGED: Added fallback-clamp-2 to protect paragraph spacing in production */}
+                <p className="text-xs sm:text-sm text-gray-300 group-hover:text-white/90 leading-relaxed line-clamp-2 fallback-clamp-2">
                   Submit research papers, abstracts, and academic articles for conferences.
                 </p>
               </div>
