@@ -98,6 +98,15 @@ const ServiceAnimationStyles = () => (
       -webkit-box-orient: vertical !important;
       overflow: hidden !important;
     }
+
+    /* Scroll handling rules mapped from references */
+    .hide-scrollbar::-webkit-scrollbar {
+      display: none;
+    }
+    .hide-scrollbar {
+      -ms-overflow-style: none;
+      scrollbar-width: none;
+    }
   `}</style>
 );
 
@@ -130,7 +139,7 @@ const Services = () => {
   };
 
   return (
-    <section className="text-black pt-6 sm:pt-10 pb-6 mt-8 no-line-decor">
+    <section className="text-black pt-6 sm:pt-10 pb-6 mt-8 no-line-decor overflow-hidden">
       <ServiceAnimationStyles />
       <div className="w-full max-w-[1440px] mx-auto px-[10px] sm:px-6 md:px-8 lg:px-10">
         {/* Heading */}
@@ -144,13 +153,14 @@ const Services = () => {
             and academic event management.
           </p>
         </div>
-        {/* Cards Structural Grid Area */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        
+        {/* Cards Structural Grid / Flex Scroll Layout */}
+        <div className="flex md:grid md:grid-cols-2 lg:grid-cols-3 gap-8 overflow-x-auto md:overflow-x-visible pb-4 md:pb-0 hide-scrollbar snap-x snap-mandatory">
           {services.map((item, i) => (
             <div
               key={i}
               onClick={() => handleCardNavigation(item.link)}
-              className={`skew-animated-card ${item.slantClass} p-6 rounded-3xl text-white hover:shadow-2xl flex flex-col justify-between h-[360px] group cursor-pointer no-line-decor`}
+              className={`skew-animated-card ${item.slantClass} p-6 rounded-3xl text-white hover:shadow-2xl flex flex-col justify-between h-[360px] group cursor-pointer no-line-decor min-w-[calc(100vw-20px)] md:min-w-0 snap-center px-6`}
             >
               {/* Inner Layout Container */}
               <div className="relative z-10 w-full flex flex-col">
@@ -163,12 +173,10 @@ const Services = () => {
                   />
                 </div>
                 {/* Card Header Title */}
-                {/* CHANGED: Added fallback-clamp-1 to protect heading heights in production */}
                 <h3 className="text-xl font-bold mb-2 text-white tracking-wide transition-colors duration-300 line-clamp-1 fallback-clamp-1 !mt-2">
                   {item.title}
                 </h3>
                 {/* Description Copy */}
-                {/* CHANGED: Added fallback-clamp-2 to protect paragraph spacing in production */}
                 <p className="text-xs sm:text-sm text-gray-300 group-hover:text-white/90 leading-relaxed line-clamp-2 fallback-clamp-2">
                   Submit research papers, abstracts, and academic articles for conferences.
                 </p>

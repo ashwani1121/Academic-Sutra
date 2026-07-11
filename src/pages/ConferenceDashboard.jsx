@@ -106,7 +106,7 @@ const ConferenceDashboard = () => {
   return (
     <section className={`min-h-screen transition-all duration-300 ${darkMode ? "bg-gray-900 text-white" : "bg-gray-100 text-gray-900"}`}>
       {/* NAVBAR */}
-      <div className={`text-white shadow-lg ${darkMode ? "bg-gray-950 border-b border-gray-800" : "bg-gradient-to-r from-blue-600 to-purple-700"}`}>
+      <div className={`text-white shadow-lg ${darkMode ? "bg-gray-955 border-b border-gray-800" : "bg-gradient-to-r from-blue-600 to-purple-700"}`}>
         <div className="max-w-[1440px] mx-auto px-4 py-4 flex flex-col md:flex-row md:items-center md:justify-between gap-4">
           {/* LOGO */}
           <h1 className="text-2xl font-bold">Conferences</h1>
@@ -119,7 +119,8 @@ const ConferenceDashboard = () => {
                   setShowHelp(!showHelp);
                   setShowUserMenu(false);
                 }}
-                className="flex items-center gap-2 hover:text-yellow-200 transition"
+                /* CHANGED: Swapped hover:text-yellow-200 with theme matching hover:text-purple-200 */
+                className="flex items-center gap-2 hover:text-purple-200 transition"
               >
                 <HelpCircle size={20} />
                 <span className="hidden sm:block">Help Center</span>
@@ -145,7 +146,8 @@ const ConferenceDashboard = () => {
                   setShowUserMenu(!showUserMenu);
                   setShowHelp(false);
                 }}
-                className="flex items-center gap-2 hover:text-yellow-200 transition-all duration-300"
+                /* CHANGED: Match the updated hover token text properties */
+                className="flex items-center gap-2 hover:text-purple-200 transition-all duration-300"
               >
                 {/* PROFILE IMAGE */}
                 <div className="w-10 h-10 rounded-full bg-white/20 flex items-center justify-center font-semibold text-lg border border-white/30">
@@ -160,9 +162,10 @@ const ConferenceDashboard = () => {
               </button>
               {/* DROPDOWN */}
               {showUserMenu && (
-                <div className={`absolute right-0 mt-4 w-[92vw] sm:w-[320px] rounded-3xl shadow-2xl overflow-hidden z-50 animate-fadeIn ${darkMode ? "bg-gray-800 text-white" : "bg-white"}`}>
+                <div className={`absolute right-0 mt-4 w-[92vw] sm:w-[320px] rounded-3xl shadow-2xl overflow-hidden z-50 animate-fadeIn bg-white text-black`}>
                   {/* TOP PROFILE CARD */}
-                  <div className="bg-gradient-to-r from-blue-600 via-purple-600 to-yellow-500 p-5 text-white">
+                  {/* CHANGED: Replaced to-yellow-500 with to-indigo-900 to give the blue/purple combo match */}
+                  <div className="bg-gradient-to-r from-blue-600 via-purple-600 to-indigo-900 p-5 text-white">
                     <div className="flex items-center gap-4">
                       <div className="w-16 h-16 rounded-full bg-white/20 flex items-center justify-center text-2xl font-bold border border-white/30">
                         AG
@@ -179,7 +182,8 @@ const ConferenceDashboard = () => {
                     {/* PROFILE */}
                     <button
                       onClick={() => navigate("/profile")}
-                      className="w-full flex items-center gap-4 px-5 py-4 hover:bg-gray-100 transition-all duration-200 text-gray-700"
+                      /* CHANGED: Swapped hover styles to match the layout buttons exactly */
+                      className="w-full flex items-center gap-4 px-5 py-4 hover:bg-blue-50/60 hover:text-purple-700 transition-all duration-200 text-gray-700"
                     >
                       <User size={20} />
                       <div className="text-left">
@@ -190,9 +194,10 @@ const ConferenceDashboard = () => {
                     {/* SETTINGS */}
                     <button
                       onClick={() => navigate("/settings")}
-                      className="w-full flex items-center gap-4 px-5 py-4 hover:bg-gray-100 transition-all duration-200 text-gray-700"
+                      /* CHANGED: Swapped hover styles to match the layout buttons exactly */
+                      className="w-full flex items-center gap-4 px-5 py-4 hover:bg-blue-50/60 hover:text-purple-700 transition-all duration-200 text-gray-700"
                     >
-                      ⚙️
+                      <Settings size={20} />
                       <div className="text-left">
                         <p className="font-medium">Settings</p>
                         <p className="text-xs text-gray-500">Manage your account settings</p>
@@ -201,9 +206,10 @@ const ConferenceDashboard = () => {
                     {/* NOTIFICATIONS */}
                     <button
                       onClick={() => navigate("/notifications")}
-                      className="w-full flex items-center gap-4 px-5 py-4 hover:bg-gray-100 transition-all duration-200 text-gray-700"
+                      /* CHANGED: Swapped hover styles to match the layout buttons exactly */
+                      className="w-full flex items-center gap-4 px-5 py-4 hover:bg-blue-50/60 hover:text-purple-700 transition-all duration-200 text-gray-700"
                     >
-                      🔔
+                      <Bell size={20} />
                       <div className="text-left">
                         <p className="font-medium">Notifications</p>
                         <p className="text-xs text-gray-500">Check latest updates</p>
@@ -212,9 +218,10 @@ const ConferenceDashboard = () => {
                     {/* DARK MODE */}
                     <button
                       onClick={() => setDarkMode(!darkMode)}
-                      className="w-full flex items-center gap-4 px-5 py-4 hover:bg-gray-100 transition-all duration-200 text-gray-700"
+                      /* CHANGED: Swapped hover styles to match the layout buttons exactly */
+                      className="w-full flex items-center gap-4 px-5 py-4 hover:bg-blue-50/60 hover:text-purple-700 transition-all duration-200 text-gray-700"
                     >
-                      🌙
+                      <Moon size={20} />
                       <div className="text-left">
                         <p className="font-medium">Dark Mode</p>
                         <p className="text-xs text-gray-500">Switch appearance mode</p>
@@ -223,7 +230,8 @@ const ConferenceDashboard = () => {
                     {/* CHANGE PASSWORD */}
                     <button
                       onClick={() => navigate("/change-password")}
-                      className="w-full flex items-center gap-4 px-5 py-4 hover:bg-gray-100 transition-all duration-200 text-gray-700"
+                      /* CHANGED: Swapped hover styles to match the layout buttons exactly */
+                      className="w-full flex items-center gap-4 px-5 py-4 hover:bg-blue-50/60 hover:text-purple-700 transition-all duration-200 text-gray-700"
                     >
                       <Lock size={20} />
                       <div className="text-left">

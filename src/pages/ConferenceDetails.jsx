@@ -67,7 +67,8 @@ const ConferenceDetails = () => {
             <div className="relative">
               <button
                 onClick={toggleHelp}
-                className="flex items-center gap-2 hover:text-yellow-200"
+                /* CHANGED: Swapped hover:text-yellow-200 with theme matching hover:text-purple-200 */
+                className="flex items-center gap-2 hover:text-purple-200 transition-colors"
               >
                 <HelpCircle size={18} />
                 Help Center
@@ -87,17 +88,17 @@ const ConferenceDetails = () => {
             <div className="relative">
               <button
                 onClick={toggleAuthor}
-                className="flex items-center gap-1"
+                className="flex items-center gap-1 hover:text-purple-200 transition-colors"
               >
                 Author
                 <ChevronDown size={16} />
               </button>
               {showAuthor && (
                 <div className="absolute right-0 mt-3 bg-white text-black rounded-xl shadow-xl w-48 overflow-hidden z-50" onClick={(e) => e.stopPropagation()}>
-                  <button className="w-full text-left px-4 py-3 hover:bg-gray-100">
+                  <button className="w-full text-left px-4 py-3 hover:bg-blue-50/60 hover:text-purple-700 transition-all duration-200 text-gray-700">
                     My Submissions
                   </button>
-                  <button className="w-full text-left px-4 py-3 hover:bg-gray-100">
+                  <button className="w-full text-left px-4 py-3 hover:bg-blue-50/60 hover:text-purple-700 transition-all duration-200 text-gray-700">
                     Author Dashboard
                   </button>
                 </div>
@@ -107,7 +108,7 @@ const ConferenceDetails = () => {
             <div className="relative">
               <button
                 onClick={toggleSystem}
-                className="flex items-center gap-1"
+                className="flex items-center gap-1 hover:text-purple-200 transition-colors"
               >
                 CMTSRM
                 <ChevronDown size={16} />
@@ -116,21 +117,22 @@ const ConferenceDetails = () => {
                 <div className="absolute right-0 mt-3 bg-white text-black rounded-xl shadow-xl w-48 overflow-hidden z-50" onClick={(e) => e.stopPropagation()}>
                   <button
                     onClick={() => navigate("/conference-dashboard")}
-                    className="w-full text-left px-4 py-3 hover:bg-gray-100"
+                    className="w-full text-left px-4 py-3 hover:bg-blue-50/60 hover:text-purple-700 transition-all duration-200 text-gray-700"
                   >
                     Conference List
                   </button>
-                  <button className="w-full text-left px-4 py-3 hover:bg-gray-100">
+                  <button className="w-full text-left px-4 py-3 hover:bg-blue-50/60 hover:text-purple-700 transition-all duration-200 text-gray-700">
                     System Settings
                   </button>
                 </div>
               )}
             </div>
-            {/* PROFILE */}
+            {/* USER PROFILE */}
             <div className="relative">
               <button
                 onClick={toggleProfile}
-                className="flex items-center gap-2 hover:text-yellow-200 transition-all duration-300"
+                /* CHANGED: Swapped hover:text-yellow-200 out for theme matching hover:text-purple-200 */
+                className="flex items-center gap-2 hover:text-purple-200 transition-all duration-300"
               >
                 {/* PROFILE IMAGE */}
                 <div className="w-10 h-10 rounded-full bg-white/20 flex items-center justify-center font-semibold text-lg border border-white/30">
@@ -147,7 +149,8 @@ const ConferenceDetails = () => {
               {showProfile && (
                 <div className="absolute right-0 mt-4 w-[92vw] sm:w-[320px] rounded-3xl shadow-2xl overflow-hidden z-50 animate-fadeIn bg-white text-black" onClick={(e) => e.stopPropagation()}>
                   {/* TOP PROFILE CARD */}
-                  <div className="bg-gradient-to-r from-blue-600 via-purple-600 to-yellow-500 p-5 text-white">
+                  {/* CHANGED: Replaced to-yellow-500 with to-indigo-900 for the blue, purple, and indigo theme flow */}
+                  <div className="bg-gradient-to-r from-blue-600 via-purple-600 to-indigo-900 p-5 text-white">
                     <div className="flex items-center gap-4">
                       <div className="w-16 h-16 rounded-full bg-white/20 flex items-center justify-center text-2xl font-bold border border-white/30">
                         AG
@@ -164,7 +167,8 @@ const ConferenceDetails = () => {
                     {/* PROFILE */}
                     <button
                       onClick={() => navigate("/profile")}
-                      className="w-full flex items-center gap-4 px-5 py-4 hover:bg-gray-100 transition-all duration-200 text-gray-700"
+                      /* CHANGED: Swapped hover:bg-gray-100 out for blue-purple theme hover styling */
+                      className="w-full flex items-center gap-4 px-5 py-4 hover:bg-blue-50/60 hover:text-purple-700 transition-all duration-200 text-gray-700"
                     >
                       <User size={20} />
                       <div className="text-left">
@@ -175,7 +179,8 @@ const ConferenceDetails = () => {
                     {/* SETTINGS */}
                     <button
                       onClick={() => navigate("/settings")}
-                      className="w-full flex items-center gap-4 px-5 py-4 hover:bg-gray-100 transition-all duration-200 text-gray-700"
+                      /* CHANGED: Swapped hover:bg-gray-100 out for blue-purple theme hover styling */
+                      className="w-full flex items-center gap-4 px-5 py-4 hover:bg-blue-50/60 hover:text-purple-700 transition-all duration-200 text-gray-700"
                     >
                       <Settings size={20} />
                       <div className="text-left">
@@ -186,7 +191,8 @@ const ConferenceDetails = () => {
                     {/* NOTIFICATIONS */}
                     <button
                       onClick={() => navigate("/notifications")}
-                      className="w-full flex items-center gap-4 px-5 py-4 hover:bg-gray-100 transition-all duration-200 text-gray-700"
+                      /* CHANGED: Swapped hover:bg-gray-100 out for blue-purple theme hover styling */
+                      className="w-full flex items-center gap-4 px-5 py-4 hover:bg-blue-50/60 hover:text-purple-700 transition-all duration-200 text-gray-700"
                     >
                       <Bell size={20} />
                       <div className="text-left">
@@ -197,7 +203,8 @@ const ConferenceDetails = () => {
                     {/* DARK MODE */}
                     <button
                       onClick={() => alert("Dark mode toggle logic")}
-                      className="w-full flex items-center gap-4 px-5 py-4 hover:bg-gray-100 transition-all duration-200 text-gray-700"
+                      /* CHANGED: Swapped hover:bg-gray-100 out for blue-purple theme hover styling */
+                      className="w-full flex items-center gap-4 px-5 py-4 hover:bg-blue-50/60 hover:text-purple-700 transition-all duration-200 text-gray-700"
                     >
                       <Moon size={20} />
                       <div className="text-left">
@@ -208,7 +215,8 @@ const ConferenceDetails = () => {
                     {/* CHANGE PASSWORD */}
                     <button
                       onClick={() => navigate("/change-password")}
-                      className="w-full flex items-center gap-4 px-5 py-4 hover:bg-gray-100 transition-all duration-200 text-gray-700"
+                      /* CHANGED: Swapped hover:bg-gray-100 out for blue-purple theme hover styling */
+                      className="w-full flex items-center gap-4 px-5 py-4 hover:bg-blue-50/60 hover:text-purple-700 transition-all duration-200 text-gray-700"
                     >
                       <Lock size={20} />
                       <div className="text-left">
